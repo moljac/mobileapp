@@ -87,7 +87,7 @@ namespace Toggl.Core.UI.Navigation
 
             if (viewModelType == typeof(MainTabBarViewModel))
             {
-                return new MainTabBarViewModel(UIDependencyContainer.Instance);
+                return new MainTabBarViewModel(dependencyContainer);
             }
 
             if (viewModelType == typeof(MainViewModel))

@@ -19,8 +19,6 @@ namespace Toggl.Core.UI.ViewModels
         public MainTabBarViewModel(UIDependencyContainer container)
             : base(container.NavigationService)
         {
-            Ensure.Argument.IsNotNull(container, nameof(container));
-
             MainViewModel = new Lazy<ViewModel>(() => new MainViewModel(
                 container.DataSource,
                 container.SyncManager,
