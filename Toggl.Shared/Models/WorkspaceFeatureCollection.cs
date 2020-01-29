@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Toggl.Shared.Models
+namespace Toggl.Shared.Models.DoNotUse
 {
     public sealed class WorkspaceFeatureCollection
     {

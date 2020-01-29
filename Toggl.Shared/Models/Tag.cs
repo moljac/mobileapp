@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Toggl.Shared.Models
+namespace Toggl.Shared.Models.DoNotUse
 {
     public sealed class Tag
     {

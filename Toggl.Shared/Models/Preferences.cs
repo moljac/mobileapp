@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Toggl.Shared.Models
+namespace Toggl.Shared.Models.DoNotUse
 {
     public sealed class Preferences
     {
