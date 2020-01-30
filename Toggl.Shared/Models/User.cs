@@ -6,7 +6,7 @@ namespace Toggl.Shared.Models.DoNotUse
     {
         public long Id { get; }
         public string ApiToken { get; }
-        public long? DefaultWorkspaceId { get; }
+        public Workspace? DefaultWorkspace { get; }
         public Email Email { get; }
         public string Fullname { get; }
         public BeginningOfWeek BeginningOfWeek { get; }
@@ -18,7 +18,7 @@ namespace Toggl.Shared.Models.DoNotUse
         public User(
             long id,
             string apiToken,
-            long? defaultWorkspaceId,
+            Workspace? defaultWorkspace,
             Email email,
             string fullname,
             BeginningOfWeek beginningOfWeek,
@@ -29,7 +29,7 @@ namespace Toggl.Shared.Models.DoNotUse
         {
             Id = id;
             ApiToken = apiToken;
-            DefaultWorkspaceId = defaultWorkspaceId;
+            DefaultWorkspace = defaultWorkspace;
             Email = email;
             Fullname = fullname;
             BeginningOfWeek = beginningOfWeek;

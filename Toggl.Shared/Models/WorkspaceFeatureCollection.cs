@@ -4,12 +4,12 @@ namespace Toggl.Shared.Models.DoNotUse
 {
     public sealed class WorkspaceFeatureCollection
     {
-        public long WorkspaceId { get; }
+        public Workspace Workspace { get; }
         public IEnumerable<IWorkspaceFeature> Features { get; }
 
-        public WorkspaceFeatureCollection(long workspaceId, IEnumerable<IWorkspaceFeature> features)
+        public WorkspaceFeatureCollection(Workspace workspace, IEnumerable<IWorkspaceFeature> features)
         {
-            WorkspaceId = workspaceId;
+            Workspace = workspace;
             Features = features;
         }
     }
