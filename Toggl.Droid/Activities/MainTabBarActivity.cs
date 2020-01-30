@@ -239,7 +239,6 @@ namespace Toggl.Droid.Activities
                 ChangeBottomBarVisibility(true);
             }
 
-            requestedInitialTab = initialTabItemId;
             navigationView.SelectedItemId = initialTabItemId;
             activeFragment = initialFragment;
         }
