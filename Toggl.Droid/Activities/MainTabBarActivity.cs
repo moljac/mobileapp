@@ -33,7 +33,6 @@ namespace Toggl.Droid.Activities
         public static readonly string StartDateExtra = "StartDateExtra";
         public static readonly string EndDateExtra = "EndDateExtra";
 
-        private readonly Dictionary<int, Task<Fragment>> fragments = new Dictionary<int, Task<Fragment>>();
         private Fragment activeFragment;
         private bool activityResumedBefore = false;
         private int? requestedInitialTab;
@@ -124,26 +123,27 @@ namespace Toggl.Droid.Activities
             requestedInitialTab = null;
         }
 
-        private Task<Fragment> getCachedFragment(int itemId)
+        private async Task<Fragment> getCachedFragment(int itemId)
         {
-            if (fragments.TryGetValue(itemId, out var fragment))
-                return fragment;
+            var cachedFragment = SupportFragmentManager.Fragments.FirstOrDefault(f => f.Tag == itemId.ToString());
+            if (cachedFragment != null)
+                return cachedFragment;
 
-            return fragments[itemId] = itemId switch
+            return itemId switch
             {
-                Resource.Id.MainTabTimerItem => Task.Run<Fragment>(async () =>
+                Resource.Id.MainTabTimerItem => await Task.Run<Fragment>(async () =>
                 {
                     var viewModel = ViewModel.MainViewModel.Value as MainViewModel;
                     await viewModel.Initialize();
                     return new MainFragment { ViewModel = viewModel };
                 }),
-                Resource.Id.MainTabReportsItem => Task.Run<Fragment>(async () =>
+                Resource.Id.MainTabReportsItem => await Task.Run<Fragment>(async () =>
                 {
                     var viewModel = ViewModel.ReportsViewModel.Value as ReportsViewModel;
                     await viewModel.Initialize();
                     return new ReportsFragment { ViewModel = viewModel };
                 }),
-                Resource.Id.MainTabCalendarItem => Task.Run<Fragment>(async () =>
+                Resource.Id.MainTabCalendarItem => await Task.Run<Fragment>(async () =>
                 {
                     var viewModel = ViewModel.CalendarViewModel.Value as CalendarViewModel;
                     await viewModel.Initialize();
@@ -197,9 +197,17 @@ namespace Toggl.Droid.Activities
                 mainFragmentToHide.SetFragmentIsVisible(false);
 
             if (fragment.IsAdded)
-                transaction.Hide(activeFragment).Show(fragment);
+            {
+                transaction
+                    .Hide(activeFragment)
+                    .Show(fragment);
+            }
             else
-                transaction.Add(Resource.Id.CurrentTabFragmmentContainer, fragment).Hide(activeFragment);
+            {
+                transaction
+                    .Add(Resource.Id.CurrentTabFragmmentContainer, fragment, fragmentId.ToString())
+                    .Hide(activeFragment);
+            }
 
             transaction.Commit();
 
@@ -219,7 +227,7 @@ namespace Toggl.Droid.Activities
             {
                 SupportFragmentManager
                     .BeginTransaction()
-                    .Add(Resource.Id.CurrentTabFragmmentContainer, initialFragment)
+                    .Add(Resource.Id.CurrentTabFragmmentContainer, initialFragment, initialTabItemId.ToString())
                     .Commit();
             }
 
