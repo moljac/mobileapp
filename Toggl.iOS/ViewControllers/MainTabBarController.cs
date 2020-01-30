@@ -43,17 +43,18 @@ namespace Toggl.iOS.ViewControllers
                 .GetAwaiter()
                 .GetResult();
 
-            async Task<UIViewController> createTabFor(Lazy<ViewModel> lazViewModel)
+            async Task<UIViewController> createTabFor(Lazy<ViewModel> lazyViewModel)
             {
-                var childViewModel = lazViewModel.Value;
-                await childViewModel.Initialize();
-                var viewController = ViewControllerLocator.GetNavigationViewController(childViewModel);
-                var childViewModelType = childViewModel.GetType();
-                var item = new UITabBarItem();
-                item.Title = "";
-                item.Image = UIImage.FromBundle(imageNameForType[childViewModelType]);
-                item.AccessibilityLabel = accessibilityLabels[childViewModelType];
-                viewController.TabBarItem = item;
+                var viewModel = lazyViewModel.Value;
+                await viewModel.Initialize();
+                var viewController = ViewControllerLocator.GetNavigationViewController(viewModel);
+                var childViewModelType = viewModel.GetType();
+                viewController.TabBarItem = new UITabBarItem
+                {
+                    Title = "",
+                    Image = UIImage.FromBundle(imageNameForType[childViewModelType]),
+                    AccessibilityLabel = accessibilityLabels[childViewModelType]
+                };
                 return viewController;
             }
         }
