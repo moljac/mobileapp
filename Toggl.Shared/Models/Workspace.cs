@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 
 namespace Toggl.Shared.Models.DoNotUse
 {
@@ -17,6 +18,7 @@ namespace Toggl.Shared.Models.DoNotUse
         public int Rounding { get; }
         public int RoundingMinutes { get; }
         public string LogoUrl { get; }
+        public IImmutableList<WorkspaceFeatureId> EnabledFeatures { get; }
         public DateTimeOffset? ServerDeletedAt { get; }
         public DateTimeOffset At { get; }
 
@@ -34,6 +36,7 @@ namespace Toggl.Shared.Models.DoNotUse
             int rounding,
             int roundingMinutes,
             string logoUrl,
+            IImmutableList<WorkspaceFeatureId> enabledFeatures,
             DateTimeOffset? serverDeletedAt,
             DateTime at)
         {
@@ -50,6 +53,7 @@ namespace Toggl.Shared.Models.DoNotUse
             Rounding = rounding;
             RoundingMinutes = roundingMinutes;
             LogoUrl = logoUrl;
+            EnabledFeatures = enabledFeatures;
             ServerDeletedAt = serverDeletedAt;
             At = at;
         }
