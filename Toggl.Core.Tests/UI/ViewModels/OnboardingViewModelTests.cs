@@ -345,7 +345,7 @@ namespace Toggl.Core.Tests.UI.ViewModels
                 TestScheduler.Start();
                 NavigationService
                     .Received()
-                    .Navigate<LoginViewModel, CredentialsParameter>(
+                    .Navigate<EmailLoginViewModel, CredentialsParameter>(
                         Arg.Is<CredentialsParameter>(parameter
                             => parameter == CredentialsParameter.Empty
                         ), ViewModel.View
