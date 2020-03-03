@@ -20,6 +20,10 @@
     <style name="AppTheme" parent="@style/BaseAppTheme">
     </style>
 
+    <style name="AppTheme.Onboarding">
+        <item name="android:statusBarColor">@color/onboardingStatusBarColor</item>
+    </style>
+
     <style name="AppTheme.OutdatedAppStatusBarColor">
         <item name="android:statusBarColor">@color/outdatedStatusBar</item>
         <item name="android:windowBackground">@color/outdatedStatusBar</item>
@@ -118,5 +122,17 @@
     <style name="WheelTimePicker" parent="@android:style/Widget.Material.Light.TimePicker">
         <item name="android:headerBackground">@drawable/background_picker_header</item>
         <item name="android:numbersSelectorColor">@color/accent</item>
+    </style>
+
+    <style name="ModalActivityTheme" parent="@style/BaseAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

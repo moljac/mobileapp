@@ -6,6 +6,7 @@ using Toggl.Core.UI.ViewModels;
 using Toggl.Core.UI.ViewModels.Settings;
 using Toggl.Core.UI.Views;
 using Toggl.Droid.Activities;
+using Toggl.Droid.Fragments;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace Toggl.Droid.Presentation
@@ -35,7 +36,9 @@ namespace Toggl.Droid.Presentation
             typeof(StartTimeEntryViewModel),
             typeof(TokenResetViewModel),
             typeof(SettingsViewModel),
-            typeof(IndependentCalendarSettingsViewModel)
+            typeof(IndependentCalendarSettingsViewModel),
+            typeof(OnboardingViewModel),
+            typeof(TermsAndCountryViewModel)
         };
 
         private readonly Dictionary<Type, ActivityPresenterInfo> presentableActivitiesInfos = new Dictionary<Type, ActivityPresenterInfo>
@@ -59,15 +62,25 @@ namespace Toggl.Droid.Presentation
             [typeof(IndependentCalendarSettingsViewModel)] = new ActivityPresenterInfo(typeof(IndependentCalendarSettingsActivity)),
             [typeof(OldSignUpViewModel)] = new ActivityPresenterInfo(typeof(SignUpActivity), clearBackStackFlags),
             [typeof(StartTimeEntryViewModel)] = new ActivityPresenterInfo(typeof(StartTimeEntryActivity)),
-            [typeof(TokenResetViewModel)] = new ActivityPresenterInfo(typeof(TokenResetActivity), clearBackStackFlags)
+            [typeof(TokenResetViewModel)] = new ActivityPresenterInfo(typeof(TokenResetActivity), clearBackStackFlags),
+            [typeof(OnboardingViewModel)] = new ActivityPresenterInfo(typeof(OnboardingActivity), clearBackStackFlags)
         };
 
         protected override void PresentOnMainThread<TInput, TOutput>(ViewModel<TInput, TOutput> viewModel, IView sourceView)
         {
             var viewModelType = viewModel.GetType();
-
-            if (!presentableActivitiesInfos.TryGetValue(viewModelType, out var presentableInfo))
+            ActivityPresenterInfo presentableInfo;
+            
+            if (viewModelType == typeof(TermsAndCountryViewModel))
+            {
+                presentableInfo = sourceView is SignUpActivity 
+                    ? new ActivityPresenterInfo(typeof(TermsAndCountryFullActivity))
+                    : new ActivityPresenterInfo(typeof(TermsAndCountryModalActivity));
+            }
+            else if (!presentableActivitiesInfos.TryGetValue(viewModelType, out presentableInfo))
+            {
                 throw new Exception($"Failed to start Activity for viewModel with type {viewModelType.Name}");
+            }
 
             var intent = new Intent(Application.Context, presentableInfo.ActivityType).AddFlags(presentableInfo.Flags);
 
