@@ -122,7 +122,7 @@ namespace Toggl.Core.UI.ViewModels
         }
 
         private Task login()
-            => Navigate<LoginViewModel, CredentialsParameter>(CredentialsParameter.With(Email.Value, Password.Value));
+            => Navigate<EmailLoginViewModel, CredentialsParameter>(CredentialsParameter.With(Email.Value, Password.Value));
 
         private void togglePasswordVisibility()
             => passwordVisibleSubject.OnNext(!passwordVisibleSubject.Value);
