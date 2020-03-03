@@ -354,7 +354,7 @@ namespace Toggl.Core.Tests.UI.ViewModels
                 ViewModel.SetEmail(email);
                 ViewModel.SetPassword(password);
 
-                ViewModel.Signup.Execute();
+                ViewModel.SignUp.Execute();
 
                 TestScheduler.Start();
                 NavigationService

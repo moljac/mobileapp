@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +15,7 @@
                 <outlet property="ForgotPasswordButton" destination="Vuw-Dm-umY" id="aHp-vr-VLB"/>
                 <outlet property="LoginButton" destination="SCu-97-vS2" id="5W8-ln-mvq"/>
                 <outlet property="LoginErrorLabel" destination="4nb-5J-It3" id="oqu-UI-eXB"/>
+                <outlet property="LogoImageView" destination="sFU-V6-jex" id="Rg3-t0-1ii"/>
                 <outlet property="PasswordErrorLabel" destination="sat-i5-Sw9" id="Dgg-yb-OCj"/>
                 <outlet property="PasswordTextField" destination="OwG-42-7Zq" id="uUA-w1-d3M"/>
                 <outlet property="ShowPasswordButton" destination="deG-eA-8Tg" id="2ig-bs-WVp"/>

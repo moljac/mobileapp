@@ -13,7 +13,7 @@ namespace Toggl.iOS.ViewControllers
 {
     public partial class LoginViewController : ReactiveViewController<EmailLoginViewModel>
     {
-        private UIStringAttributes plainTextAttributes = new UIStringAttributes
+        private readonly UIStringAttributes plainTextAttributes = new UIStringAttributes
         {
             ForegroundColor = ColorAssets.Text,
             Font = UIFont.SystemFontOfSize(15, UIFontWeight.Regular)
@@ -30,11 +30,13 @@ namespace Toggl.iOS.ViewControllers
             prepareViews();
 
             var signUpButton = createSignUpButton();
-            NavigationItem.RightBarButtonItem = new UIBarButtonItem(signUpButton);
-            NavigationItem.LeftBarButtonItem = new UIBarButtonItem(
+            var closeButton = new UIBarButtonItem(
                 UIImage.FromBundle("icClose"),
                 UIBarButtonItemStyle.Plain,
                 (sender, args) => ViewModel.Close());
+
+            NavigationItem.RightBarButtonItem = new UIBarButtonItem(signUpButton);
+            NavigationItem.LeftBarButtonItem = closeButton;
 
             //E-mail
             ViewModel.Email
@@ -45,14 +47,6 @@ namespace Toggl.iOS.ViewControllers
             EmailTextField.Rx().Text()
                 .Select(Email.From)
                 .Subscribe(ViewModel.Email.Accept)
-                .DisposedBy(DisposeBag);
-
-            ViewModel.EmailErrorMessage
-                .Merge(ViewModel.PasswordErrorMessage)
-                .Merge(ViewModel.LoginErrorMessage)
-                .Where(error => !string.IsNullOrEmpty(error))
-                .SelectUnit()
-                .Subscribe(EmailTextField.Rx().Shake())
                 .DisposedBy(DisposeBag);
 
             //Password
@@ -78,10 +72,6 @@ namespace Toggl.iOS.ViewControllers
                 .DisposedBy(DisposeBag);
 
             //Errors
-            ViewModel.LoginEnabled
-                .Subscribe(LoginButton.Rx().Enabled())
-                .DisposedBy(DisposeBag);
-
             ViewModel.EmailErrorMessage
                 .Subscribe(EmailErrorLabel.Rx().Text())
                 .DisposedBy(DisposeBag);
@@ -94,17 +84,61 @@ namespace Toggl.iOS.ViewControllers
                 .Subscribe(LoginErrorLabel.Rx().Text())
                 .DisposedBy(DisposeBag);
 
+            ViewModel.ShakeEmail
+                .Subscribe(EmailTextField.Rx().Shake())
+                .DisposedBy(DisposeBag);
+
             //Actions
             ShowPasswordButton.Rx()
                 .BindAction(ViewModel.TogglePasswordVisibility)
                 .DisposedBy(DisposeBag);
 
             signUpButton.Rx()
-                .BindAction(ViewModel.Signup)
+                .BindAction(ViewModel.SignUp)
                 .DisposedBy(DisposeBag);
 
-            LoginButton.Rx().Tap()
-                .Subscribe(_ => ViewModel.Login())
+            LoginButton.Rx()
+                .BindAction(ViewModel.Login)
+                .DisposedBy(DisposeBag);
+
+            ForgotPasswordButton.Rx()
+                .BindAction(ViewModel.ForgotPassword)
+                .DisposedBy(DisposeBag);
+
+            //Loading: disabling all interaction
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(LoginButton.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(signUpButton.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(closeButton.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(ForgotPasswordButton.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Subscribe(this.Rx().ModalInPresentation())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(ShowPasswordButton.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
+            //Loading: making everything look disabled
+            ViewModel.IsLoading
+                .Select(opacityForLoadingState)
+                .Subscribe(LogoImageView.Rx().AnimatedAlpha())
                 .DisposedBy(DisposeBag);
 
             ViewModel.IsLoading
@@ -113,12 +147,41 @@ namespace Toggl.iOS.ViewControllers
                 .DisposedBy(DisposeBag);
 
             ViewModel.IsLoading
-                .Select(CommonFunctions.Invert)
-                .Subscribe(LoginButton.Rx().Enabled())
+                .Select(opacityForLoadingState)
+                .Subscribe(LoginButton.Rx().AnimatedAlpha())
                 .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(opacityForLoadingState)
+                .Subscribe(signUpButton.Rx().AnimatedAlpha())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(opacityForLoadingState)
+                .Subscribe(WelcomeLabel.Rx().AnimatedAlpha())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(opacityForLoadingState)
+                .Subscribe(EmailTextField.Rx().AnimatedAlpha())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(opacityForLoadingState)
+                .Subscribe(PasswordTextField.Rx().AnimatedAlpha())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(opacityForLoadingState)
+                .Subscribe(ForgotPasswordButton.Rx().AnimatedAlpha())
+                .DisposedBy(DisposeBag);
+
 
             EmailTextField.BecomeFirstResponder();
         }
+
+        private float opacityForLoadingState(bool isLoading)
+            => isLoading ? 0.6f : 1;
 
         private void prepareViews()
         {
@@ -137,7 +200,7 @@ namespace Toggl.iOS.ViewControllers
             PasswordTextField.ShouldReturn += _ =>
             {
                 PasswordTextField.ResignFirstResponder();
-                ViewModel.Login();
+                ViewModel.Login.Execute();
                 return false;
             };
 

@@ -56,7 +56,8 @@ namespace Toggl.Core.UI.ViewModels
         public IObservable<string> PasswordErrorMessage { get; }
         public IObservable<string> LoginErrorMessage { get; }
 
-        public ViewAction Signup { get; }
+        public ViewAction Login { get; }
+        public ViewAction SignUp { get; }
         public ViewAction ForgotPassword { get; }
         public ViewAction TogglePasswordVisibility { get; }
 
@@ -92,7 +93,8 @@ namespace Toggl.Core.UI.ViewModels
             this.schedulerProvider = schedulerProvider;
             this.interactorFactory = interactorFactory;
 
-            Signup = rxActionFactory.FromAsync(signup);
+            Login = rxActionFactory.FromAction(login);
+            SignUp = rxActionFactory.FromAsync(signUp);
             ForgotPassword = rxActionFactory.FromAsync(forgotPassword);
             TogglePasswordVisibility = rxActionFactory.FromAction(togglePasswordVisibility);
 
@@ -132,39 +134,41 @@ namespace Toggl.Core.UI.ViewModels
             return base.Initialize(parameter);
         }
 
-        public void Login()
+        public void login()
         {
+            loginErrorMessageSubject.OnNext(string.Empty);
+
             if (Email.Value.IsEmpty)
-            {
                 emailErrorMessageSubject.OnNext(Resources.NoEmailError);
-                shakeEmailSubject.OnNext(Unit.Default);
-            }
             else if (!Email.Value.IsValid)
-            {
                 emailErrorMessageSubject.OnNext(Resources.InvalidEmailError);
-                shakeEmailSubject.OnNext(Unit.Default);
-            }
+            else
+                emailErrorMessageSubject.OnNext(string.Empty);
 
             if (Password.Value.IsEmpty)
-            {
                 passwordErrorMessageSubject.OnNext(Resources.NoPasswordError);
+            else
+                passwordErrorMessageSubject.OnNext(string.Empty);
+
+            if (!credentialsAreValid)
+            {
+                shakeEmailSubject.OnNext(Unit.Default);
+                return;
             }
 
-            if (isLoadingSubject.Value || !credentialsAreValid) return;
+            if (isLoadingSubject.Value) return;
 
             isLoadingSubject.OnNext(true);
-            emailErrorMessageSubject.OnNext("");
-            passwordErrorMessageSubject.OnNext("");
-            loginErrorMessageSubject.OnNext("");
 
             loginDisposable =
                 userAccessManager
                     .Login(Email.Value, Password.Value)
+                    .Delay(TimeSpan.FromSeconds(2))
                     .Track(analyticsService.Login, AuthenticationMethod.EmailAndPassword)
                     .Subscribe(_ => onAuthenticated(), onError, onCompleted);
         }
 
-        private Task signup()
+        private Task signUp()
         {
             if (isLoadingSubject.Value)
                 return Task.CompletedTask;
