@@ -162,6 +162,55 @@ namespace Toggl.Core.Tests.UI.ViewModels
             }
         }
 
+        public sealed class TheShakeEmailFieldProperty : SignUpViewModelTest
+        {
+            [Theory, LogIfTooSlow]
+            [InlineData("", "")]
+            [InlineData("Not an e-mail", "123")]
+            [InlineData("Not an e-mail", "")]
+            [InlineData("Not an e-mail", "valid password")]
+            [InlineData("person@company.com", "")]
+            [InlineData("person@company.com", "123")]
+            public void EmitsWhenTryingToSignUpWithInvalidCredentials(string email, string password)
+            {
+                var observer = TestScheduler.CreateObserver<Unit>();
+                ViewModel.ShakeEmailField.Subscribe(observer);
+                ViewModel.Email.Accept(Email.From(email));
+                ViewModel.Password.Accept(Password.From(password));
+
+                ViewModel.SignUp.Execute();
+                TestScheduler.Start();
+
+                observer.Values().Should().HaveCount(1);
+            }
+
+            [Fact, LogIfTooSlow]
+            public void EmitsWhenTryingToSignUpWithAlreadySignedUpEmail()
+            {
+                ViewModel.Email.Accept(ValidEmail);
+                ViewModel.Password.Accept(ValidPassword);
+                var request = Substitute.For<IRequest>();
+                request.Endpoint.Returns(new Uri("http://any.url.com"));
+                var exception = new EmailIsAlreadyUsedException(
+                    new BadRequestException(
+                        request, ApiExceptions.Response
+                    )
+                );
+                UserAccessManager
+                    .SignUp(Arg.Any<Email>(), Arg.Any<Password>(), true, Arg.Any<int>(), Arg.Any<string>())
+                    .Returns(
+                        Observable.Throw<Unit>(exception)
+                    );
+                var observer = TestScheduler.CreateObserver<Unit>();
+                ViewModel.ShakeEmailField.Subscribe(observer);
+
+                ViewModel.SignUp.Execute();
+                TestScheduler.Start();
+
+                observer.Values().Should().HaveCount(1);
+            }
+        }
+
         public sealed class TheSignUpEnabledProperty : SignUpViewModelTest
         {
             [Fact, LogIfTooSlow]
@@ -206,7 +255,7 @@ namespace Toggl.Core.Tests.UI.ViewModels
                 TestScheduler.Start();
 
                 emailErrorObserver.Values().Should().BeEquivalentTo(new[] { "", Resources.NoEmailError });
-        }
+            }
 
             [Fact, LogIfTooSlow]
             public void SetsTheInvalidEmailErrorIfInvalidEmailIsEntered()
