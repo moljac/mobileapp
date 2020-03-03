@@ -135,6 +135,16 @@ namespace Toggl.iOS.ViewControllers
                 .Subscribe(ShowPasswordButton.Rx().Enabled())
                 .DisposedBy(DisposeBag);
 
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(EmailTextField.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
+            ViewModel.IsLoading
+                .Select(CommonFunctions.Invert)
+                .Subscribe(PasswordTextField.Rx().Enabled())
+                .DisposedBy(DisposeBag);
+
             //Loading: making everything look disabled
             ViewModel.IsLoading
                 .Select(opacityForLoadingState)
