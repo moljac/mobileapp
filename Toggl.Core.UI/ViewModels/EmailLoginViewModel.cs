@@ -163,7 +163,6 @@ namespace Toggl.Core.UI.ViewModels
             loginDisposable =
                 userAccessManager
                     .Login(Email.Value, Password.Value)
-                    .Delay(TimeSpan.FromSeconds(2))
                     .Track(analyticsService.Login, AuthenticationMethod.EmailAndPassword)
                     .Subscribe(_ => onAuthenticated(), onError, onCompleted);
         }
