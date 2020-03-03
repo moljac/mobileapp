@@ -134,7 +134,7 @@ namespace Toggl.Core.UI.ViewModels
             return base.Initialize(parameter);
         }
 
-        public void login()
+        private void login()
         {
             loginErrorMessageSubject.OnNext(string.Empty);
 
