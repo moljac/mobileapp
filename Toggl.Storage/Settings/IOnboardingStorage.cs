@@ -23,12 +23,10 @@ namespace Toggl.Storage.Settings
         void SetUserSignedUp();
         void SetNavigatedAwayFromMainViewAfterStopButton();
         void SetTimeEntryContinued();
-        void SetCompletedCalendarOnboarding();
 
         DateTimeOffset? GetLastOpened();
         DateTimeOffset? GetFirstOpened();
         bool CompletedOnboarding();
-        bool CompletedCalendarOnboarding();
 
         void StartButtonWasTapped();
         void TimeEntryWasTapped();
@@ -37,9 +35,6 @@ namespace Toggl.Storage.Settings
 
         void EditedTimeEntry();
         void SelectsProject();
-
-        void SetJanuary2020CampaignWasShown();
-        bool WasJanuary2020CampaignShown();
 
         bool WasDismissed(IDismissable dismissable);
         void Dismiss(IDismissable dismissable);
@@ -53,6 +48,8 @@ namespace Toggl.Storage.Settings
         bool DidShowSiriClipboardInstruction();
         void SetDidShowSiriClipboardInstruction(bool value);
 
+        bool CalendarPermissionWasAskedBefore();
+        void SetCalendarPermissionWasAskedBefore();
         bool IsFirstTimeConnectingCalendars();
         void SetIsFirstTimeConnectingCalendars();
 

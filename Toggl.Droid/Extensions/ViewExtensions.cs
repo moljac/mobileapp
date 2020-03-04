@@ -4,10 +4,10 @@ using Android.Views;
 using Android.Views.InputMethods;
 using System.Collections.Generic;
 using System.Linq;
-using AndroidColor = Android.Graphics.Color;
 using AndroidX.Core.Widget;
 using Google.Android.Material.AppBar;
 using Toggl.Droid.Helper;
+using Toggl.Shared;
 
 namespace Toggl.Droid.Extensions
 {
@@ -51,10 +51,7 @@ namespace Toggl.Droid.Extensions
 
             scrollView.SetOnScrollChangeListener(new MaterialScrollBehaviorListener(appBarLayout));
 
-            if (scrollView is NestedScrollView)
-            {
-                appBarLayout.Post(() => appBarLayout.Elevation = 0);
-            }
+            appBarLayout.Post(() => appBarLayout.Elevation = 0);
         }
 
         private class MaterialScrollBehaviorListener : Java.Lang.Object, View.IOnScrollChangeListener
@@ -72,6 +69,13 @@ namespace Toggl.Droid.Extensions
                 var targetElevation = v.CanScrollVertically(-1) ?  defaultToolbarElevationInDPs.DpToPixels(appBarLayout.Context) : 0f;
                 appBarLayout.Elevation = targetElevation;
             }
+        }
+
+        public static Point GetLocationOnScreen(this View view)
+        {
+            var coordinates = new int[2];
+            view.GetLocationOnScreen(coordinates);
+            return new Point(coordinates[0], coordinates[1]);
         }
 
         public static void UpdateMargin(this View view, int? left = null, int? top = null, int? right = null, int? bottom = null)

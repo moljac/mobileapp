@@ -67,9 +67,9 @@ namespace Toggl.Core.Analytics
 
         IAnalyticsEvent<ProjectTagSuggestionSource> StartEntrySelectTag { get; }
 
-        IAnalyticsEvent<ReportsSource, int, int, double> ReportsSuccess { get; }
+        IAnalyticsEvent<DateRangeSelectionSource, int, int, double> ReportsSuccess { get; }
 
-        IAnalyticsEvent<ReportsSource, int, double> ReportsFailure { get; }
+        IAnalyticsEvent<DateRangeSelectionSource, int, double> ReportsFailure { get; }
 
         IAnalyticsEvent OfflineModeDetected { get; }
 
@@ -217,14 +217,8 @@ namespace Toggl.Core.Analytics
 
         IAnalyticsEvent<CalendarSwipeDirection, int, string> CalendarSingleSwipe { get; }
 
-        IAnalyticsEvent<string> MarketingMessageShown { get; }
-
-        IAnalyticsEvent<string> MarketingMessageCallToActionHit { get; }
-
-        IAnalyticsEvent<string> MarketingMessageDismissed { get; }
-
-        void SetAppCenterUserId(long id);
-        void ResetAppCenterUserId();
+        void SetUserId(long id);
+        void ResetUserId();
 
         void Track(string eventName, Dictionary<string, string> parameters = null);
 

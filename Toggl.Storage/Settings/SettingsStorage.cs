@@ -22,7 +22,6 @@ namespace Toggl.Storage.Settings
         private const string lastAccessDateKey = "LastAccessDate";
         private const string firstAccessDateKey = "FirstAccessDate";
         private const string completedOnboardingKey = "CompletedOnboarding";
-        private const string completedCalendarOnboardingKey = "CompletedCalendarOnboarding";
 
         private const string preferManualModeKey = "PreferManualMode";
         private const string runningTimerNotificationsKey = "RunningTimerNotifications";
@@ -48,9 +47,11 @@ namespace Toggl.Storage.Settings
         private const string lastLoginKey = "LastLogin";
         private const string lastTimePlaceholdersWereCreated = "LastPullTimeEntries";
 
+        private const string calendarIntegrationEnabledKey = "CalendarIntegrationEnabled";
         private const string enabledCalendarsKey = "EnabledCalendars";
         private const char calendarIdSeparator = ';';
         private const string isFirstTimeConnectingCalendarsKey = "IsFirstTimeConnectingCalendars";
+        private const string calendarViewWasOpenedBeforeKey = "CalendarViewWasOpenedBefore";
 
         private const string calendarNotificationsEnabledKey = "CalendarNotificationsEnabled";
         private const string timeSpanBeforeCalendarNotificationsKey = "TimeSpanBeforeCalendarNotifications";
@@ -58,8 +59,6 @@ namespace Toggl.Storage.Settings
         private const string didShowSiriClipboardInstructionKey = "didShowSiriClipboardInstructionKey";
 
         private const string swipeActionsDisabledKey = "swipeActionsDisabled";
-
-        private const string showedJanuary2020Campaign = "showedJanuary2020Campaign";
 
         private readonly Version version;
         private readonly IKeyValueStorage keyValueStorage;
@@ -77,6 +76,7 @@ namespace Toggl.Storage.Settings
         private readonly ISubject<bool> areStoppedTimerNotificationsEnabledSubject;
         private readonly ISubject<bool> hasTimeEntryBeenContinuedSubject;
         private readonly ISubject<bool> navigatedAwayFromMainViewAfterTappingStopButtonSubject;
+        private readonly ISubject<bool> calendarIntegrationEnabledSubject;
         private readonly ISubject<List<string>> enabledCalendarsSubject;
         private readonly ISubject<bool> calendarNotificationsEnabledSubject;
         private readonly ISubject<TimeSpan> timeSpanBeforeCalendarNotificationsSubject;
@@ -103,6 +103,7 @@ namespace Toggl.Storage.Settings
             (userSignedUpUsingTheAppSubject, UserSignedUpUsingTheApp) = prepareSubjectAndObservable(userSignedUpUsingTheAppKey, keyValueStorage.GetBool);
             (startButtonWasTappedSubject, StartButtonWasTappedBefore) = prepareSubjectAndObservable(startButtonWasTappedBeforeKey, keyValueStorage.GetBool);
             (projectOrTagWasAddedSubject, ProjectOrTagWasAddedBefore) = prepareSubjectAndObservable(projectOrTagWasAddedBeforeKey, keyValueStorage.GetBool);
+            (calendarIntegrationEnabledSubject, CalendarIntegrationEnabledObservable) = prepareSubjectAndObservable(calendarIntegrationEnabledKey, keyValueStorage.GetBool);
             (calendarNotificationsEnabledSubject, CalendarNotificationsEnabled) = prepareSubjectAndObservable(calendarNotificationsEnabledKey, keyValueStorage.GetBool);
             (navigatedAwayFromMainViewAfterTappingStopButtonSubject, NavigatedAwayFromMainViewAfterTappingStopButton) = prepareSubjectAndObservable(navigatedAwayFromMainViewAfterTappingStopButtonKey, keyValueStorage.GetBool);
             (hasTimeEntryBeenContinuedSubject, HasTimeEntryBeenContinued) = prepareSubjectAndObservable(hasTimeEntryBeenContinuedKey, keyValueStorage.GetBool);
@@ -190,6 +191,12 @@ namespace Toggl.Storage.Settings
 
         public IObservable<bool> HasTimeEntryBeenContinued { get; }
 
+        public bool CalendarPermissionWasAskedBefore()
+            => keyValueStorage.GetBool(calendarViewWasOpenedBeforeKey);
+
+        public void SetCalendarPermissionWasAskedBefore()
+        => keyValueStorage.SetBool(calendarViewWasOpenedBeforeKey, true);
+
         public void SetLastOpened(DateTimeOffset date)
         {
             keyValueStorage.SetDateTimeOffset(lastAccessDateKey, date);
@@ -230,14 +237,7 @@ namespace Toggl.Storage.Settings
             keyValueStorage.SetBool(completedOnboardingKey, true);
         }
 
-        public void SetCompletedCalendarOnboarding()
-        {
-            keyValueStorage.SetBool(completedCalendarOnboardingKey, true);
-        }
-
         public bool CompletedOnboarding() => keyValueStorage.GetBool(completedOnboardingKey);
-
-        public bool CompletedCalendarOnboarding() => keyValueStorage.GetBool(completedCalendarOnboardingKey);
 
         public DateTimeOffset? GetLastOpened() => keyValueStorage.GetDateTimeOffset(lastAccessDateKey);
 
@@ -311,14 +311,6 @@ namespace Toggl.Storage.Settings
 
         public void SetDidShowSiriClipboardInstruction(bool value) => keyValueStorage.SetBool(didShowSiriClipboardInstructionKey, value);
 
-        public void SetJanuary2020CampaignWasShown()
-        {
-            keyValueStorage.SetBool(showedJanuary2020Campaign, true);
-        }
-
-        public bool WasJanuary2020CampaignShown()
-            => keyValueStorage.GetBool(showedJanuary2020Campaign);
-
         public bool WasDismissed(IDismissable dismissable) => keyValueStorage.GetBool(onboardingPrefix + dismissable.Key);
 
         public void Dismiss(IDismissable dismissable) => keyValueStorage.SetBool(onboardingPrefix + dismissable.Key, true);
@@ -349,6 +341,12 @@ namespace Toggl.Storage.Settings
             keyValueStorage.SetBool(hasTimeEntryBeenContinuedKey, false);
             hasTimeEntryBeenContinuedSubject.OnNext(false);
 
+            keyValueStorage.SetBool(calendarIntegrationEnabledKey, false);
+            calendarIntegrationEnabledSubject.OnNext(false);
+
+            keyValueStorage.Remove(enabledCalendarsKey);
+            enabledCalendarsSubject.OnNext(new List<string>());
+
             keyValueStorage.RemoveAllWithPrefix(onboardingPrefix);
         }
 
@@ -360,6 +358,7 @@ namespace Toggl.Storage.Settings
         public IObservable<bool> AreRunningTimerNotificationsEnabledObservable { get; }
         public IObservable<bool> AreStoppedTimerNotificationsEnabledObservable { get; }
         public IObservable<bool> SwipeActionsEnabled { get; }
+        public IObservable<bool> CalendarIntegrationEnabledObservable { get; }
         public IObservable<List<string>> EnabledCalendars { get; }
         public IObservable<bool> CalendarNotificationsEnabled { get; }
         public IObservable<TimeSpan> TimeSpanBeforeCalendarNotifications { get; }
@@ -407,6 +406,15 @@ namespace Toggl.Storage.Settings
             SetRunningTimerNotifications(false);
             isManualModeEnabledSubject.OnNext(false);
             SetEnabledCalendars();
+        }
+
+        bool IUserPreferences.CalendarIntegrationEnabled()
+            => keyValueStorage.GetBool(calendarIntegrationEnabledKey);
+
+        public void SetCalendarIntegrationEnabled(bool enabled)
+        {
+            keyValueStorage.SetBool(calendarIntegrationEnabledKey, enabled);
+            calendarIntegrationEnabledSubject.OnNext(enabled);
         }
 
         public List<string> EnabledCalendarIds()

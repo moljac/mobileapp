@@ -6,6 +6,7 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using System;
+using System.Collections.Immutable;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Toggl.Core.Analytics;
@@ -30,6 +31,10 @@ using FoundationResources = Toggl.Shared.Resources;
 using AndroidX.Core.Content;
 using AndroidX.RecyclerView.Widget;
 using Google.Android.Material.Snackbar;
+using Toggl.Core;
+using Toggl.Core.UI.Collections;
+using Toggl.Core.UI.ViewModels.MainLog.Identity;
+using Toggl.Droid.Views;
 
 namespace Toggl.Droid.Fragments
 {
@@ -119,8 +124,8 @@ namespace Toggl.Droid.Fragments
                 .Subscribe(timeEntryCardDotView.Rx().DrawableColor())
                 .DisposedBy(DisposeBag);
 
-            addDrawable = ContextCompat.GetDrawable(Context, Resource.Drawable.add_white);
-            playDrawable = ContextCompat.GetDrawable(Context, Resource.Drawable.play_white);
+            addDrawable = ContextCompat.GetDrawable(Context, Resource.Drawable.ic_add);
+            playDrawable = ContextCompat.GetDrawable(Context, Resource.Drawable.ic_play_big);
 
             ViewModel.IsInManualMode
                 .Select(isManualMode => isManualMode ? addDrawable : playDrawable)
@@ -172,11 +177,11 @@ namespace Toggl.Droid.Fragments
                 .DisposedBy(DisposeBag);
 
             refreshLayout.Rx().Refreshed()
-                 .Subscribe(ViewModel.Refresh.Inputs)
-                 .DisposedBy(DisposeBag);
+                .Subscribe(ViewModel.Refresh.Inputs)
+                .DisposedBy(DisposeBag);
 
             ViewModel.MainLogItems
-                .Subscribe(mainLogRecyclerAdapter.UpdateCollection)
+                .Subscribe(updateMainLog)
                 .DisposedBy(DisposeBag);
 
             ViewModel.IsTimeEntryRunning
@@ -211,7 +216,40 @@ namespace Toggl.Droid.Fragments
                 .Subscribe(onEmptyStateVisibilityChanged)
                 .DisposedBy(DisposeBag);
 
+            playButton.Rx().TouchEvents()
+                .Subscribe(handlePlayFabEvent)
+                .DisposedBy(DisposeBag);
+
+            playButton.Rx().LongPress()
+                .Subscribe(_ => playButton.StopAnimation())
+                .DisposedBy(DisposeBag);
+
             setupOnboardingSteps();
+        }
+
+        private void updateMainLog(IImmutableList<AnimatableSectionModel<MainLogSectionViewModel, MainLogItemViewModel, IMainLogKey>> items)
+        {
+            mainLogRecyclerAdapter.UpdateCollection(items);
+            NotifyLayoutIsReady();
+        }
+
+        private void handlePlayFabEvent(View.TouchEventArgs eventArgs)
+        {
+            if (eventArgs == null)
+            {
+                return;
+            }
+
+            eventArgs.Handled = false;
+
+            if (eventArgs.Event.Action == MotionEventActions.Up)
+            {
+                playButton.StopAnimation();
+            }
+            else
+            {
+                playButton.TryStartAnimation();
+            }
         }
 
         public void ScrollToStart()

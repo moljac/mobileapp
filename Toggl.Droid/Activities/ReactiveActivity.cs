@@ -10,7 +10,6 @@ using System.Reactive.Disposables;
 using Toggl.Core.UI.ViewModels;
 using Toggl.Core.UI.Views;
 using Toggl.Droid.Extensions;
-using Toggl.Droid.Extensions;
 using Toggl.Droid.Presentation;
 
 namespace Toggl.Droid.Activities
@@ -171,6 +170,7 @@ namespace Toggl.Droid.Activities
 
             SupportActionBar.SetDisplayHomeAsUpEnabled(showHomeAsUp);
             SupportActionBar.SetDisplayShowHomeEnabled(showHomeAsUp);
+            toolbar.Elevation = 0;
         }
 
         private void setupRootViewInsets()
