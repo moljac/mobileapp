@@ -34,6 +34,7 @@ namespace Toggl.Core.Tests.UI.ViewModels
 
             protected Password ValidPassword { get; } = Password.From("T0t4lly s4afe p4$$");
             protected Password InvalidPassword { get; } = Password.From("123");
+            protected Password EmptyPassword { get; } = Password.From("");
 
             protected ILastTimeUsageStorage LastTimeUsageStorage { get; } = Substitute.For<ILastTimeUsageStorage>();
 
@@ -288,6 +289,55 @@ namespace Toggl.Core.Tests.UI.ViewModels
                         ReactiveTest.OnNext(1, ""),
                         ReactiveTest.OnNext(2, Resources.IncorrectEmailOrPassword)
                     );
+                }
+
+                [Fact, LogIfTooSlow]
+                public void TracksIncorrectEmailOrPasswordLoginFailureWhenReceivedUnauthorizedException()
+                {
+                    var exception = new UnauthorizedException(
+                        Substitute.For<IRequest>(), Substitute.For<IResponse>());
+                    UserAccessManager.Login(Arg.Any<Email>(), Arg.Any<Password>())
+                        .Returns(Observable.Throw<Unit>(exception));
+
+                    ViewModel.Login();
+
+                    AnalyticsService.IncorrectEmailOrPasswordLoginFailure.Received().Track();
+                }
+
+                [Fact, LogIfTooSlow]
+                public void TracksTrueForLocalEmailValidationLoginCheckWhenEmailIsValid()
+                {
+                    ViewModel.Login();
+
+                    AnalyticsService.LocalEmailValidationLoginCheck.Received().Track(true);
+                }
+
+                [Fact, LogIfTooSlow]
+                public void TracksFalseForLocalEmailValidationLoginCheckWhenEmailIsNotValid()
+                {
+                    ViewModel.SetEmail(InvalidEmail);
+
+                    ViewModel.Login();
+
+                    AnalyticsService.LocalEmailValidationLoginCheck.Received().Track(false);
+                }
+
+                [Fact, LogIfTooSlow]
+                public void TracksTrueForLocalPasswordValidationLoginCheckWhenEmailIsValid()
+                {
+                    ViewModel.Login();
+
+                    AnalyticsService.LocalPasswordValidationLoginCheck.Received().Track(true);
+                }
+
+                [Fact, LogIfTooSlow]
+                public void TracksFalseForLocalPasswordValidationLoginCheckWhenEmailIsNotValid()
+                {
+                    ViewModel.SetPassword(EmptyPassword);
+
+                    ViewModel.Login();
+
+                    AnalyticsService.LocalPasswordValidationLoginCheck.Received().Track(false);
                 }
 
                 [Fact, LogIfTooSlow]

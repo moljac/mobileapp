@@ -168,6 +168,12 @@ namespace Toggl.Core.Analytics
 
         public IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
 
+        public IAnalyticsEvent IncorrectEmailOrPasswordLoginFailure { get; }
+
+        public IAnalyticsEvent<bool> LocalEmailValidationLoginCheck { get; }
+
+        public IAnalyticsEvent<bool> LocalPasswordValidationLoginCheck { get; }
+
         public IAnalyticsEvent<string, string> UnknownLoginFailure { get; }
 
         public IAnalyticsEvent<string, string> UnknownSignUpFailure { get; }
@@ -313,7 +319,10 @@ namespace Toggl.Core.Analytics
             LocalEmailValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(LocalEmailValidationSignUpCheck), "IsValid");
             LocalPasswordValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(LocalPasswordValidationSignUpCheck), "IsValid");
             LocalCountryValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(LocalCountryValidationSignUpCheck), "IsProvided");
-            IncorrectEmailOrPasswordSignUpFailure new AnalyticsEvent(this, nameof(IncorrectEmailOrPasswordSignUpFailure));
+            IncorrectEmailOrPasswordSignUpFailure = new AnalyticsEvent(this, nameof(IncorrectEmailOrPasswordSignUpFailure));
+            IncorrectEmailOrPasswordLoginFailure = new AnalyticsEvent(this, nameof(IncorrectEmailOrPasswordLoginFailure));
+            LocalEmailValidationLoginCheck = new AnalyticsEvent<bool>(this, nameof(LocalEmailValidationLoginCheck), "IsValid");
+            LocalPasswordValidationLoginCheck = new AnalyticsEvent<bool>(this, nameof(LocalPasswordValidationLoginCheck), "IsValid");
             UnknownLoginFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownLoginFailure), "Type", "Message");
             UnknownSignUpFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownSignUpFailure), "Type", "Message");
             RateLimitingDelayDuringSyncing = new AnalyticsEvent<int>(this, nameof(RateLimitingDelayDuringSyncing), "DelayDurationSeconds");

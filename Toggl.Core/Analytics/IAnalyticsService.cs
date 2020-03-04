@@ -165,6 +165,12 @@ namespace Toggl.Core.Analytics
 
         IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
 
+        IAnalyticsEvent IncorrectEmailOrPasswordLoginFailure { get; }
+
+        IAnalyticsEvent<bool> LocalEmailValidationLoginCheck { get; }
+
+        IAnalyticsEvent<bool> LocalPasswordValidationLoginCheck { get; }
+
         IAnalyticsEvent<string, string> UnknownLoginFailure { get; }
 
         IAnalyticsEvent<string, string> UnknownSignUpFailure { get; }
