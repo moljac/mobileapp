@@ -138,9 +138,6 @@
   <data name="IncorrectEmailOrPassword" xml:space="preserve">
     <value>Email ou senha incorretos. Por favor, tente novamente.</value>
   </data>
-  <data name="LoginGetHelpLoggingIn" xml:space="preserve">
-    <value>Precisa de ajuda para entrar?</value>
-  </data>
   <data name="MondayInitial" xml:space="preserve">
     <value>S</value>
   </data>
@@ -699,9 +696,6 @@ Abra o app para marcar o tempo offline.</value>
   <data name="NoSuggestionsAvailable" xml:space="preserve">
     <value>Nenhuma sugestão disponível</value>
   </data>
-  <data name="Nenh" xml:space="preserve">
-    <value>Nenhum registro de tempo ativo</value>
-  </data>
   <data name="General" xml:space="preserve">
     <value>Geral</value>
   </data>
@@ -1037,5 +1031,161 @@ Comece a marcar seu tempo e os registros mais usados aparecerão aqui.</value>
   </data>
   <data name="Timer" xml:space="preserve">
     <value>Registros</value>
+  </data>
+  <data name="MultipleEntriesDeleted" xml:space="preserve">
+    <value>{0} registros de tempos removidos</value>
+  </data>
+  <data name="EntryDeleted" xml:space="preserve">
+    <value>Registro de tempo removido</value>
+  </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>Não agora</value>
+  </data>
+  <data name="SuggestionsHeader" xml:space="preserve">
+    <value>SUGESTÕES</value>
+  </data>
+  <data name="WorkingOnThis" xml:space="preserve">
+    <value>Sugestão</value>
+  </data>
+  <data name="WorkingOnThese" xml:space="preserve">
+    <value>Sugestões</value>
+  </data>
+  <data name="ExpandTimeEntryGroup" xml:space="preserve">
+    <value>Expandir grupo de registros de tempo</value>
+  </data>
+  <data name="CollapseTimeEntryGroup" xml:space="preserve">
+    <value>Agrupar novamente grupo de registros de tempo</value>
+  </data>
+  <data name="SelectProjectTitle" xml:space="preserve">
+    <value>Projetos</value>
+  </data>
+  <data name="ReportTooLongTitle" xml:space="preserve">
+    <value>Grande demais</value>
+  </data>
+  <data name="ReportTooLongDescription" xml:space="preserve">
+    <value>O periodo máximo de um relatório é de 365 dias.</value>
+  </data>
+  <data name="LoginToTrack" xml:space="preserve">
+    <value>Faça login para marcar seu tempo</value>
+  </data>
+  <data name="LoginToShowSuggestions" xml:space="preserve">
+    <value>Faça login para mostrar as sugestões</value>
+  </data>
+  <data name="StartAndStopTime" xml:space="preserve">
+    <value>Horários de início e termino</value>
+  </data>
+  <data name="OutdatedAppTryTogglCom" xml:space="preserve">
+    <value>tente acessar toggl.com</value>
+  </data>
+  <data name="SiriShortcutCustomTimeEntryTitle" xml:space="preserve">
+    <value>Detalhes do registro de tempo</value>
+  </data>
+  <data name="SiriShortcutDescriptionFromClipboard" xml:space="preserve">
+    <value>Descrição a partir da área de transferência</value>
+  </data>
+  <data name="SiriClipboardInstructionTitle" xml:space="preserve">
+    <value>Colar descrição a partir da área de transferência</value>
+  </data>
+  <data name="SiriClipboardInstructionDoNotShowAgain" xml:space="preserve">
+    <value>Não mostrar novamente</value>
+  </data>
+  <data name="SiriShortcutCellAdd" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="SiriShortcutsStartTimer" xml:space="preserve">
+    <value>Iniciar registro de tempo</value>
+  </data>
+  <data name="SiriShortcutsStartTimerWithName" xml:space="preserve">
+    <value>Iniciar registro de tempo: {0}</value>
+  </data>
+  <data name="SiriShortcutsStartFromClipboard" xml:space="preserve">
+    <value>Iniciar a partir da área de transferência</value>
+  </data>
+  <data name="SiriShortcutsContinueTracking" xml:space="preserve">
+    <value>Continuar marcando tempo</value>
+  </data>
+  <data name="SiriShortcutsStopRunningEntry" xml:space="preserve">
+    <value>Parar registro de tempo ativo</value>
+  </data>
+  <data name="SiriShortcutsStartTimerWithCustomDetails" xml:space="preserve">
+    <value>Iniciar um registro de tempo com detalhes customizados</value>
+  </data>
+  <data name="SiriShortcutsShowReport" xml:space="preserve">
+    <value>Exibir relatório</value>
+  </data>
+  <data name="SiriShortcutsShowCustomReport" xml:space="preserve">
+    <value>Exibir relatório customizado</value>
+  </data>
+  <data name="SiriShortcutsTimerShortcuts" xml:space="preserve">
+    <value>Atalhos de registro de tempo</value>
+  </data>
+  <data name="StartTimerInvocationPhrase" xml:space="preserve">
+    <value>Marcar tempo</value>
+  </data>
+  <data name="StopTimerInvocationPhrase" xml:space="preserve">
+    <value>Pare meu registro de tempo</value>
+  </data>
+  <data name="ShowReportsInvocationPhrase" xml:space="preserve">
+    <value>Mostre meu tempo</value>
+  </data>
+  <data name="ReportErrorOffline" xml:space="preserve">
+    <value>Falha na conexão de rede</value>
+  </data>
+  <data name="ReportErrorGeneric" xml:space="preserve">
+    <value>Algo deu errado</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Início</value>
+  </data>
+  <data name="SiriNoCurrentEntryRunning" xml:space="preserve">
+    <value>Nenhum registro de tempo ativo.</value>
+  </data>
+  <data name="ManualModeDescription" xml:space="preserve">
+    <value>Controla o comportamento padrão do botão de iniciar um registro de tempo. Aperta e segurar o botão sempre ativará o modo alternativo.</value>
+  </data>
+  <data name="SetSmartRemindersMessage" xml:space="preserve">
+    <value>Receva lembretes para marcar o tempo referente ao seus eventos</value>
+  </data>
+  <data name="SelectCalendarsMessage" xml:space="preserve">
+    <value>Escolha o calendário com eventos que você quer registrar usando o Toggl</value>
+  </data>
+  <data name="SiriReportPeriodInstruction" xml:space="preserve">
+    <value>Peça para a siri para ver um relário para esse período</value>
+  </data>
+  <data name="SiriCustomTimeEntryInstruction" xml:space="preserve">
+    <value>Peçe para a Siri para iniciar um registro de tempo com esses detalhes</value>
+  </data>
+  <data name="SiriShortcuts" xml:space="preserve">
+    <value>Atalhos da Siri</value>
+  </data>
+  <data name="SiriShortcutsDescription" xml:space="preserve">
+    <value>Adicione atalhos para controlar o Toggl com a Siri e o app de atalhos</value>
+  </data>
+  <data name="SiriClipboardInstructionDescription" xml:space="preserve">
+    <value>Ao escolher essa opção, o texto que estiver na área de transferência do sistema será usado como a descrição do seu registro de tempo.</value>
+  </data>
+  <data name="SiriClipboardHintLabel" xml:space="preserve">
+    <value>Ao executar esse atalho, a descrição será criada a partir da área de transferência</value>
+  </data>
+  <data name="SiriTrackEntrySuggestedInvocationPhrase" xml:space="preserve">
+    <value>Marcar {0}</value>
+  </data>
+  <data name="SiriShowReportSuggestedInvocationPhrase" xml:space="preserve">
+    <value>Mostrar o tempo de {0}</value>
+  </data>
+  <data name="SiriShortcutLoginToUseShortcut" xml:space="preserve">
+    <value>Faça login para mostrar esse atalho.</value>
+  </data>
+  <data name="SiriShortcutOpenTheAppToSync" xml:space="preserve">
+    <value>Abra o app para sincronizar seus dados e tente novamente.</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Período</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>Horário de termino</value>
+  </data>
+  <data name="TimerDefaults" xml:space="preserve">
+    <value>Configurações padrão</value>
   </data>
 </root>
