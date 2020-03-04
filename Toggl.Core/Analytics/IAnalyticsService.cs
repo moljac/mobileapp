@@ -157,11 +157,11 @@ namespace Toggl.Core.Analytics
 
         IAnalyticsEvent EmailIsAlreadyInUsedSignUpFailure { get; }
 
-        IAnalyticsEvent<bool> EmailValidationSignUpCheck { get; }
+        IAnalyticsEvent<bool> LocalEmailValidationSignUpCheck { get; }
 
-        IAnalyticsEvent<bool> PasswordValidationSignUpCheck { get; }
+        IAnalyticsEvent<bool> LocalPasswordValidationSignUpCheck { get; }
 
-        IAnalyticsEvent<bool> CountryValidationSignUpCheck { get; }
+        IAnalyticsEvent<bool> LocalCountryValidationSignUpCheck { get; }
 
         IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
 

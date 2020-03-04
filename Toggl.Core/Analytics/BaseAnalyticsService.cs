@@ -160,11 +160,11 @@ namespace Toggl.Core.Analytics
 
         public IAnalyticsEvent EmailIsAlreadyInUsedSignUpFailure { get; }
 
-        public IAnalyticsEvent<bool> EmailValidationSignUpCheck { get; }
+        public IAnalyticsEvent<bool> LocalEmailValidationSignUpCheck { get; }
 
-        public IAnalyticsEvent<bool> PasswordValidationSignUpCheck { get; }
+        public IAnalyticsEvent<bool> LocalPasswordValidationSignUpCheck { get; }
 
-        public IAnalyticsEvent<bool> CountryValidationSignUpCheck { get; }
+        public IAnalyticsEvent<bool> LocalCountryValidationSignUpCheck { get; }
 
         public IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
 
@@ -310,9 +310,9 @@ namespace Toggl.Core.Analytics
             BackgroundSyncFailed = new AnalyticsEvent<string, string, string>(this, nameof(BackgroundSyncFailed), "Type", "Message", "StackTrace");
             BackgroundSyncMustStopExcecution = new AnalyticsEvent(this, nameof(BackgroundSyncMustStopExcecution));
             EmailIsAlreadyInUsedSignUpFailure = new AnalyticsEvent(this, nameof(EmailIsAlreadyInUsedSignUpFailure));
-            EmailValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(EmailValidationSignUpCheck), "IsValid");
-            PasswordValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(PasswordValidationSignUpCheck), "IsValid");
-            CountryValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(CountryValidationSignUpCheck), "IsProvided");
+            LocalEmailValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(LocalEmailValidationSignUpCheck), "IsValid");
+            LocalPasswordValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(LocalPasswordValidationSignUpCheck), "IsValid");
+            LocalCountryValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(LocalCountryValidationSignUpCheck), "IsProvided");
             IncorrectEmailOrPasswordSignUpFailure new AnalyticsEvent(this, nameof(IncorrectEmailOrPasswordSignUpFailure));
             UnknownLoginFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownLoginFailure), "Type", "Message");
             UnknownSignUpFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownSignUpFailure), "Type", "Message");

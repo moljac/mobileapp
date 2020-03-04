@@ -132,33 +132,33 @@ namespace Toggl.Core.UI.ViewModels
             if (Email.Value.IsEmpty)
             {
                 emailErrorSubject.OnNext(Resources.NoEmailError);
-                analyticsService.EmailValidationSignUpCheck.Track(false);
+                analyticsService.LocalEmailValidationSignUpCheck.Track(false);
             }
             else if (!Email.Value.IsValid)
             {
                 emailErrorSubject.OnNext(Resources.InvalidEmailError);
-                analyticsService.EmailValidationSignUpCheck.Track(false);
+                analyticsService.LocalEmailValidationSignUpCheck.Track(false);
             }
             else
             {
                 emailErrorSubject.OnNext(String.Empty);
-                analyticsService.EmailValidationSignUpCheck.Track(true);
+                analyticsService.LocalEmailValidationSignUpCheck.Track(true);
             }
 
             if (Password.Value.IsEmpty)
             {
                 passwordErrorSubject.OnNext(Resources.NoPasswordError);
-                analyticsService.PasswordValidationSignUpCheck.Track(false);
+                analyticsService.LocalPasswordValidationSignUpCheck.Track(false);
             }
             else if (!Password.Value.IsValid)
             {
                 passwordErrorSubject.OnNext(Resources.InvalidPasswordError);
-                analyticsService.PasswordValidationSignUpCheck.Track(false);
+                analyticsService.LocalPasswordValidationSignUpCheck.Track(false);
             }
             else
             {
                 passwordErrorSubject.OnNext(string.Empty);
-                analyticsService.PasswordValidationSignUpCheck.Track(true);
+                analyticsService.LocalPasswordValidationSignUpCheck.Track(true);
             }
 
             if (!credentialsAreValid)  return;
@@ -167,11 +167,11 @@ namespace Toggl.Core.UI.ViewModels
 
             if (countryId == null)
             {
-                analyticsService.CountryValidationSignUpCheck.Track(false);
+                analyticsService.LocalCountryValidationSignUpCheck.Track(false);
                 return;
             }
             else
-                analyticsService.CountryValidationSignUpCheck.Track(true);
+                analyticsService.LocalCountryValidationSignUpCheck.Track(true);
 
             isLoadingSubject.OnNext(true);
 
