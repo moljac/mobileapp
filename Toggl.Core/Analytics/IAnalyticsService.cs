@@ -155,6 +155,16 @@ namespace Toggl.Core.Analytics
 
         IAnalyticsEvent<int> RateLimitingDelayDuringSyncing { get; }
 
+        IAnalyticsEvent EmailIsAlreadyInUsedSignUpFailure { get; }
+
+        IAnalyticsEvent<bool> EmailValidationSignUpCheck { get; }
+
+        IAnalyticsEvent<bool> PasswordValidationSignUpCheck { get; }
+
+        IAnalyticsEvent<bool> CountryValidationSignUpCheck { get; }
+
+        IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
+
         IAnalyticsEvent<string, string> UnknownLoginFailure { get; }
 
         IAnalyticsEvent<string, string> UnknownSignUpFailure { get; }

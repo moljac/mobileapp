@@ -130,25 +130,48 @@ namespace Toggl.Core.UI.ViewModels
         private async Task signUp()
         {
             if (Email.Value.IsEmpty)
+            {
                 emailErrorSubject.OnNext(Resources.NoEmailError);
+                analyticsService.EmailValidationSignUpCheck.Track(false);
+            }
             else if (!Email.Value.IsValid)
+            {
                 emailErrorSubject.OnNext(Resources.InvalidEmailError);
+                analyticsService.EmailValidationSignUpCheck.Track(false);
+            }
             else
+            {
                 emailErrorSubject.OnNext(String.Empty);
+                analyticsService.EmailValidationSignUpCheck.Track(true);
+            }
 
             if (Password.Value.IsEmpty)
+            {
                 passwordErrorSubject.OnNext(Resources.NoPasswordError);
+                analyticsService.PasswordValidationSignUpCheck.Track(false);
+            }
             else if (!Password.Value.IsValid)
+            {
                 passwordErrorSubject.OnNext(Resources.InvalidPasswordError);
+                analyticsService.PasswordValidationSignUpCheck.Track(false);
+            }
             else
+            {
                 passwordErrorSubject.OnNext(string.Empty);
+                analyticsService.PasswordValidationSignUpCheck.Track(true);
+            }
 
             if (!credentialsAreValid)  return;
 
             countryId = await requestAcceptanceOfTermsAndConditionsAndSetCountry();
 
             if (countryId == null)
+            {
+                analyticsService.CountryValidationSignUpCheck.Track(false);
                 return;
+            }
+            else
+                analyticsService.CountryValidationSignUpCheck.Track(true);
 
             isLoadingSubject.OnNext(true);
 
@@ -200,9 +223,11 @@ namespace Toggl.Core.UI.ViewModels
             {
                 case UnauthorizedException _:
                     signUpErrorSubject.OnNext(Resources.IncorrectEmailOrPassword);
+                    analyticsService.IncorrectEmailOrPasswordSignUpFailure.Track();
                     break;
                 case EmailIsAlreadyUsedException _:
                     signUpErrorSubject.OnNext(Resources.EmailIsAlreadyUsedError);
+                    analyticsService.EmailIsAlreadyInUsedSignUpFailure.Track();
                     break;
                 default:
                     analyticsService.UnknownSignUpFailure.Track(exception.GetType().FullName, exception.Message);

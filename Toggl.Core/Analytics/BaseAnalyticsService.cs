@@ -158,6 +158,16 @@ namespace Toggl.Core.Analytics
 
         public IAnalyticsEvent BackgroundSyncMustStopExcecution { get; }
 
+        public IAnalyticsEvent EmailIsAlreadyInUsedSignUpFailure { get; }
+
+        public IAnalyticsEvent<bool> EmailValidationSignUpCheck { get; }
+
+        public IAnalyticsEvent<bool> PasswordValidationSignUpCheck { get; }
+
+        public IAnalyticsEvent<bool> CountryValidationSignUpCheck { get; }
+
+        public IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
+
         public IAnalyticsEvent<string, string> UnknownLoginFailure { get; }
 
         public IAnalyticsEvent<string, string> UnknownSignUpFailure { get; }
@@ -299,6 +309,11 @@ namespace Toggl.Core.Analytics
             BackgroundSyncFinished = new AnalyticsEvent<string>(this, nameof(BackgroundSyncFinished), "BackgroundSyncFinishedWithOutcome");
             BackgroundSyncFailed = new AnalyticsEvent<string, string, string>(this, nameof(BackgroundSyncFailed), "Type", "Message", "StackTrace");
             BackgroundSyncMustStopExcecution = new AnalyticsEvent(this, nameof(BackgroundSyncMustStopExcecution));
+            EmailIsAlreadyInUsedSignUpFailure = new AnalyticsEvent(this, nameof(EmailIsAlreadyInUsedSignUpFailure));
+            EmailValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(EmailValidationSignUpCheck), "IsValid");
+            PasswordValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(PasswordValidationSignUpCheck), "IsValid");
+            CountryValidationSignUpCheck = new AnalyticsEvent<bool>(this, nameof(CountryValidationSignUpCheck), "IsProvided");
+            IncorrectEmailOrPasswordSignUpFailure new AnalyticsEvent(this, nameof(IncorrectEmailOrPasswordSignUpFailure));
             UnknownLoginFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownLoginFailure), "Type", "Message");
             UnknownSignUpFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownSignUpFailure), "Type", "Message");
             RateLimitingDelayDuringSyncing = new AnalyticsEvent<int>(this, nameof(RateLimitingDelayDuringSyncing), "DelayDurationSeconds");
