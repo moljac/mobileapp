@@ -174,6 +174,16 @@ namespace Toggl.Core.Analytics
 
         public IAnalyticsEvent<bool> LocalPasswordValidationLoginCheck { get; }
 
+        public IAnalyticsEvent TaCCountryNotSelected { get; }
+
+        public IAnalyticsEvent<string> TaCSelectedCountry { get; }
+
+        public IAnalyticsEvent TaCPrivacyPolicyOpened { get; }
+
+        public IAnalyticsEvent TaCTermsOfServiceOpened { get; }
+
+        public IAnalyticsEvent TaCAgreeButtonTapped { get; }
+
         public IAnalyticsEvent<string, string> UnknownLoginFailure { get; }
 
         public IAnalyticsEvent<string, string> UnknownSignUpFailure { get; }
@@ -323,6 +333,11 @@ namespace Toggl.Core.Analytics
             IncorrectEmailOrPasswordLoginFailure = new AnalyticsEvent(this, nameof(IncorrectEmailOrPasswordLoginFailure));
             LocalEmailValidationLoginCheck = new AnalyticsEvent<bool>(this, nameof(LocalEmailValidationLoginCheck), "IsValid");
             LocalPasswordValidationLoginCheck = new AnalyticsEvent<bool>(this, nameof(LocalPasswordValidationLoginCheck), "IsValid");
+            TaCCountryNotSelected = new AnalyticsEvent(this, nameof(TaCCountryNotSelected));
+            TaCSelectedCountry = new AnalyticsEvent<string>(this, nameof(TaCSelectedCountry), "Country");
+            TaCPrivacyPolicyOpened = new AnalyticsEvent(this, nameof(TaCPrivacyPolicyOpened));
+            TaCTermsOfServiceOpened = new AnalyticsEvent(this, nameof(TaCTermsOfServiceOpened));
+            TaCAgreeButtonTapped = new AnalyticsEvent(this, nameof(TaCAgreeButtonTapped));
             UnknownLoginFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownLoginFailure), "Type", "Message");
             UnknownSignUpFailure = new AnalyticsEvent<string, string>(this, nameof(UnknownSignUpFailure), "Type", "Message");
             RateLimitingDelayDuringSyncing = new AnalyticsEvent<int>(this, nameof(RateLimitingDelayDuringSyncing), "DelayDurationSeconds");

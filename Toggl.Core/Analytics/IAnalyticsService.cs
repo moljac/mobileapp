@@ -163,6 +163,16 @@ namespace Toggl.Core.Analytics
 
         IAnalyticsEvent<bool> LocalCountryValidationSignUpCheck { get; }
 
+        IAnalyticsEvent TaCCountryNotSelected { get; }
+
+        IAnalyticsEvent<string> TaCSelectedCountry { get; }
+
+        IAnalyticsEvent TaCPrivacyPolicyOpened { get; }
+
+        IAnalyticsEvent TaCTermsOfServiceOpened { get; }
+
+        IAnalyticsEvent TaCAgreeButtonTapped { get; }
+
         IAnalyticsEvent IncorrectEmailOrPasswordSignUpFailure { get; }
 
         IAnalyticsEvent IncorrectEmailOrPasswordLoginFailure { get; }
