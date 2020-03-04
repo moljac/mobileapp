@@ -139,7 +139,7 @@
     <value>Email ou senha incorretos. Por favor, tente novamente.</value>
   </data>
   <data name="LoginGetHelpLoggingIn" xml:space="preserve">
-    <value>Obtenha ajuda para entrar</value>
+    <value>Precisa de ajuda para entrar?</value>
   </data>
   <data name="MondayInitial" xml:space="preserve">
     <value>S</value>
@@ -178,13 +178,13 @@
     <value>Estamos sincronizando os seus dados</value>
   </data>
   <data name="SettingsSyncInProgressMessage" xml:space="preserve">
-    <value>Você pode perder seus dados caso tente sair antes da sincronização dos dados terminar.</value>
+    <value>Você pode perder seus dados caso tente sair antes da sincronização terminar.</value>
   </data>
   <data name="GenericLoginError" xml:space="preserve">
-    <value>Foi mal, parece que estamos tendo algum problema ao tentar autenticá-lo. Por favor, tente novamente.</value>
+    <value>Sinto muito, parece que estamos tendo algum problema com sua autenticação. Por favor, tente novamente.</value>
   </data>
   <data name="GenericSignUpError" xml:space="preserve">
-    <value>Foi mal, parece que estamos tendo algum problema ao tentar criar sua conta. Por favor, tente novamente.</value>
+    <value>Sinto muito, parece que estamos tendo algum problema ao tentar criar sua conta. Por favor, tente novamente.</value>
   </data>
   <data name="SettingsUnsyncedTitle" xml:space="preserve">
     <value>Dados não sincronizados</value>
@@ -196,7 +196,7 @@
     <value>Sair</value>
   </data>
   <data name="UnitSecond" xml:space="preserve">
-    <value>seg</value>
+    <value>s</value>
   </data>
   <data name="UnitHour" xml:space="preserve">
     <value>h</value>
@@ -226,7 +226,7 @@
     <value>(tarefa não sincronizada)</value>
   </data>
   <data name="TagPlaceholder" xml:space="preserve">
-    <value>(tag nao sincronizada)</value>
+    <value>(tag não sincronizada)</value>
   </data>
   <data name="Syncing" xml:space="preserve">
     <value>Sincronizando...</value>
@@ -307,19 +307,19 @@
     <value>Digite o nome do projeto</value>
   </data>
   <data name="PasswordResetExplanation" xml:space="preserve">
-    <value>Por favor digite seu email para resetar sua senha.</value>
+    <value>Por favor, digite seu email para redefinir sua senha.</value>
   </data>
   <data name="PasswordResetSuccess" xml:space="preserve">
-    <value>Link enviado. Por favor verifique seu email para mudar sua senha.</value>
+    <value>Link enviado. Por favor, verifique seu email para mudar sua senha.</value>
   </data>
   <data name="PasswordResetEmailDoesNotExistError" xml:space="preserve">
     <value>Email desconhecido. Certifique-se de que o email está correto e tente novamente.</value>
   </data>
   <data name="PasswordResetGeneralError" xml:space="preserve">
-    <value>Pedimos desculpas, ocorreu um problem ao tentar mudar sua senha. Tente novamente.</value>
+    <value>Pedimos desculpas, ocorreu um problema ao tentar mudar sua senha. Tente novamente.</value>
   </data>
   <data name="PasswordResetOfflineError" xml:space="preserve">
-    <value>Você está offline. Por favor conecte-se a internet e tente novamente.</value>
+    <value>Você está offline. Por favor, conecte-se à internet e tente novamente.</value>
   </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Tem certeza?</value>
@@ -361,17 +361,17 @@
     <value>Perfil</value>
   </data>
   <data name="YouHaveCreatedYourFirstTimeEntry" xml:space="preserve">
-    <value>Você crious seu primeiro registro de tempo</value>
+    <value>Você criou seu primeiro registro de tempo</value>
   </data>
   <data name="WorkspaceChangedAlertTitle" xml:space="preserve">
     <value>Você mudou o workspace.</value>
   </data>
   <data name="WorkspaceChangedAlertMessage" xml:space="preserve">
-    <value>O projeto e o registro de tempo serão mudados para o workspace que foi selecionado.</value>
+    <value>O projeto e o registro de tempo serão mudados para o workspace selecionado.</value>
   </data>
   <data name="WidgetNoRunningTimeEntryError" xml:space="preserve">
     <value>Nenhum registro de tempo ativo.
-Abra o app para iniciar um.</value>
+Abra o app para começar a marcar seu tempo.</value>
   </data>
   <data name="WidgetGenericError" xml:space="preserve">
     <value>Ocorreu um erro.
@@ -391,7 +391,7 @@ Abra o app para marcar o tempo offline.</value>
     <value>Usuário</value>
   </data>
   <data name="Use24HourClock" xml:space="preserve">
-    <value>Usar o sistema de 24 horas</value>
+    <value>Usar o relógio de 24 horas</value>
   </data>
   <data name="UpdateTheApp" xml:space="preserve">
     <value>Atualize o app</value>
@@ -439,10 +439,10 @@ Abra o app para marcar o tempo offline.</value>
     <value>30 minutos antes</value>
   </data>
   <data name="ThankYouForTheFeedback" xml:space="preserve">
-    <value>Obrigado pelo seu feedback. Se você tinha alguma pergunta, nós entramos em contato em breve.</value>
+    <value>Agradecemos o feedback. Caso você tenha perguntado algo, entramos em contato em breve.</value>
   </data>
   <data name="TermsOfServiceDialogMessage" xml:space="preserve">
-    <value>Ao clicar em "Concordo". você entende e concorda com os {0} e {1} do Toggl</value>
+    <value>Ao clicar em "Concordo", você entende e concorda com os {0} e {1} do Toggl</value>
   </data>
   <data name="TenMinutes" xml:space="preserve">
     <value>10 minutos antes</value>
@@ -484,7 +484,7 @@ Abra o app para marcar o tempo offline.</value>
     <value>Inicia um registro de tempo</value>
   </data>
   <data name="Suggestion" xml:space="preserve">
-    <value>Suggestão</value>
+    <value>Sugestão</value>
   </data>
   <data name="SuccessfullySyncedData" xml:space="preserve">
     <value>Dados sincronizados com sucesso</value>
@@ -493,7 +493,7 @@ Abra o app para marcar o tempo offline.</value>
     <value>Enviar feedback</value>
   </data>
   <data name="StopTimeBeforeStartTimeWarning" xml:space="preserve">
-    <value>A hora final deve ser depois da hora de inicio!</value>
+    <value>A hora final deve ser depois da hora de início!</value>
   </data>
   <data name="StopCurrentlyRunningTimeEntry" xml:space="preserve">
     <value>Parar o registro de tempo atual</value>
@@ -505,19 +505,19 @@ Abra o app para marcar o tempo offline.</value>
     <value>Iniciar um registro de tempo</value>
   </data>
   <data name="StartTimeAfterStopTimeWarning" xml:space="preserve">
-    <value>A hora de inicio deve ser anterior à hora final!</value>
+    <value>A hora de início deve ser anterior à hora final!</value>
   </data>
   <data name="StartTimeAfterCurrentTimeWarning" xml:space="preserve">
-    <value>A hora de inicio deve ser anterior à hora atual!</value>
+    <value>A hora de início deve ser anterior à hora atual!</value>
   </data>
   <data name="StartTime" xml:space="preserve">
-    <value>Hora de inicio</value>
+    <value>Hora de início</value>
   </data>
   <data name="StartInBackgroundAction" xml:space="preserve">
     <value>Criar em segundo plano</value>
   </data>
   <data name="Startdate" xml:space="preserve">
-    <value>Data de inicio</value>
+    <value>Data de início</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Iniciar</value>
@@ -595,13 +595,13 @@ Abra o app para marcar o tempo offline.</value>
     <value>Claro</value>
   </data>
   <data name="Projects" xml:space="preserve">
-    <value>Projectos</value>
+    <value>Projetos</value>
   </data>
   <data name="RatingViewNegativeCallToActionTitle" xml:space="preserve">
     <value>Sem problemas</value>
   </data>
   <data name="RatingViewNegativeCallToActionDescription" xml:space="preserve">
-    <value>Você gostaria de nos dar um feedback? Isso nos ajudaria a melhorar o Toggl.</value>
+    <value>Você gostaria de deixar um feedback? Isso nos ajudaria a melhorar o Toggl.</value>
   </data>
   <data name="RatingViewNegativeCallToActionButtonTitle" xml:space="preserve">
     <value>Diga-nos o que está errado</value>
@@ -664,7 +664,7 @@ Abra o app para marcar o tempo offline.</value>
     <value>Ou {0}</value>
   </data>
   <data name="NoWorkspaceErrorMessage" xml:space="preserve">
-    <value>Parece que você foi removido de um workspace. Crie um novo para continuar.</value>
+    <value>Parece que seu acesso a um workspace foi removido. Crie um novo para continuar.</value>
   </data>
   <data name="Now" xml:space="preserve">
     <value>Agora</value>
@@ -676,13 +676,13 @@ Abra o app para marcar o tempo offline.</value>
     <value>Registro de tempo ativo</value>
   </data>
   <data name="NotificationSettingExplaination" xml:space="preserve">
-    <value>Seja notificado de eventos do seu calendário antes deles começarem.</value>
+    <value>Receba notificações de eventos do seu calendário antes deles começarem.</value>
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notificações</value>
   </data>
   <data name="NotificationDisabledNotice" xml:space="preserve">
-    <value>Notificações desabilitadas. Se você gostaria de recebe-las, por favor habilite-as no app de configurações.</value>
+    <value>Notificações desabilitadas. Se preferir recebê-las, favor habilitá-las no app de configurações.</value>
   </data>
   <data name="NonBillable" xml:space="preserve">
     <value>Não faturável</value>
@@ -727,7 +727,7 @@ Abra o app para marcar o tempo offline.</value>
     <value>Cliente</value>
   </data>
   <data name="GetPasswordResetLink" xml:space="preserve">
-    <value>Obter um link para resetar sua senha</value>
+    <value>Obter um link para redefinir sua senha</value>
   </data>
   <data name="DoneWithExclamationMark" xml:space="preserve">
     <value>Feito!</value>
@@ -845,7 +845,7 @@ Use-as para marcar seus registros de tempo com palavras-chave.</value>
     <value>Tentar novamente</value>
   </data>
   <data name="APITokenResetSuccess" xml:space="preserve">
-    <value>Sua token de API foi resetada.</value>
+    <value>Seu token de API foi redefinido.</value>
   </data>
   <data name="Send" xml:space="preserve">
     <value>Enviar</value>
@@ -862,7 +862,7 @@ PS. Nosso suporte atualmente só atende em inglês. Nos desculpamos por qualquer
     <value>(arquivado)</value>
   </data>
   <data name="ContinueLastEntry" xml:space="preserve">
-    <value>Continuar ultimo registro de tempo</value>
+    <value>Continuar último registro de tempo</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Voltar</value>
@@ -969,7 +969,7 @@ Por favor atualize o app para continuar.</value>
 Use-os para categorizar o seu tempo.</value>
   </data>
   <data name="GenericInternetConnectionErrorMessage" xml:space="preserve">
-    <value>Sem conexão a internet. Por favor, tente novamente.</value>
+    <value>Sem conexão à internet. Por favor, tente novamente.</value>
   </data>
   <data name="HasTags" xml:space="preserve">
     <value>Possui tags</value>
@@ -981,7 +981,7 @@ Use-os para categorizar o seu tempo.</value>
     <value>Esse registro de tempo pertence a um workspace a qual você não possui mais acesso e, portanto, não pode ser sincronizado. Mova-o para um workspace diferente mudando o projeto ou delete-o.</value>
   </data>
   <data name="FirstDayOfTheWeek" xml:space="preserve">
-    <value>Primerio dia da semana</value>
+    <value>Primeiro dia da semana</value>
   </data>
   <data name="LinkCalendarsMessage" xml:space="preserve">
     <value>Veja os eventos do seu calendário no Toggl e transforme-os em registros de tempo de forma prática</value>
@@ -1015,13 +1015,13 @@ Comece a marcar seu tempo e os registros mais usados aparecerão aqui.</value>
     <value>Anterior</value>
   </data>
   <data name="ReportsEmptyStateDescription" xml:space="preserve">
-    <value>Você não possui registros de tempo para o periodo selecionado.</value>
+    <value>Você não possui registros de tempo para o período selecionado.</value>
   </data>
   <data name="SearchObject" xml:space="preserve">
     <value>Buscar {0}</value>
   </data>
   <data name="SelectDefaultWorkspaceDescription" xml:space="preserve">
-    <value>Seu tempo será registrado automaticamente nesse workspace. Você pode mudar isso mais tarde nas configuração.</value>
+    <value>Seu tempo será registrado automaticamente nesse workspace. Você pode mudar isso mais tarde nas configurações.</value>
   </data>
   <data name="SelectWorkspace" xml:space="preserve">
     <value>Selecione o workspace</value>
