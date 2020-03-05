@@ -1142,7 +1142,6 @@
     <AndroidResource Include="Resources\drawable\ic_check.xml" />
     <AndroidResource Include="Resources\drawable\ic_padlock.xml" />
     <AndroidResource Include="Resources\drawable\ic_next.xml" />
-    <AndroidResource Include="Resources\drawable\login_background.xml" />
     <AndroidResource Include="Resources\layout\DatePickerShortcutCell.axml" />
     <AndroidResource Include="Resources\layout\DateRangePicker.axml" />
     <AndroidResource Include="Resources\layout\DateRangePickerMonthView.axml" />
