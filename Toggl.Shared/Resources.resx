@@ -195,7 +195,7 @@ Powerful reporting.</value>
         <comment>Title of the sign up view</comment>
     </data>
     <data name="LoginForgotPassword" xml:space="preserve">
-        <value>Forgot your password? </value>
+        <value>Forgot your password?</value>
         <comment>Link to the password reset view</comment>
     </data>
     <data name="LoginGetHelpLoggingIn" xml:space="preserve">
