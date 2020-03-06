@@ -111,7 +111,6 @@
         android:letterSpacing="0.04"
         android:textColor="@color/errorText"
         android:textSize="12sp"
-        android:text="MUCH ERROR!"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
