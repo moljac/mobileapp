@@ -18,5 +18,17 @@ namespace Toggl.Networking.Tests.Integration.BaseTests
             timeEntries.Should().NotBeNull();
             timeEntries.Should().BeEmpty();
         }
+
+        [Fact, LogTestInfo]
+        public override async Task FetchesTheExactSameEntityWhenFetchingTwice()
+        {
+            var (validApi, user) = await SetupTestUser();
+
+            var firstEntity = await CallEndpointWith(validApi);
+            await Task.Delay(500).ConfigureAwait(false);
+            var secondEntity = await CallEndpointWith(validApi);
+
+            firstEntity.Should().BeEquivalentTo(secondEntity);
+        }
     }
 }
