@@ -230,6 +230,11 @@ Powerful reporting.</value>
         <value>Please enter your email to reset your password.</value>
         <comment>Helper text that appears below the email field in the password reset view</comment>
     </data>
+    <data name="PasswordResetMessage" xml:space="preserve">
+        <value>Enter your email to 
+reset your password</value>
+        <comment>Helper text that appears below the email field in the password reset view</comment>
+    </data>
     <data name="IncorrectEmailOrPassword" xml:space="preserve">
         <value>Incorrect email/password. Please, try again.</value>
         <comment>Error message shown when authentication fails</comment>

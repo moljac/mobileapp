@@ -304,6 +304,10 @@
     <data name="PasswordResetExplanation" xml:space="preserve">
         <value>パスワードをリセットするためにメールアドレスを入力してください</value>
     </data>
+    <data name="PasswordResetMessage" xml:space="preserve">
+        <value>パスワードをリセットするために
+メールアドレスを入力して</value>
+    </data>
     <data name="PasswordResetSuccess" xml:space="preserve">
         <value>メールが送信されました。メールを確認してパスワードをリセットしてください</value>
     </data>

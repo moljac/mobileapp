@@ -208,6 +208,12 @@ namespace Toggl.Shared {
             }
         }
         
+        public static string PasswordResetMessage {
+            get {
+                return ResourceManager.GetString("PasswordResetMessage", resourceCulture);
+            }
+        }
+        
         public static string IncorrectEmailOrPassword {
             get {
                 return ResourceManager.GetString("IncorrectEmailOrPassword", resourceCulture);
