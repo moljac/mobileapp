@@ -32,70 +32,12 @@ namespace Toggl.Droid.Activities
         }
         protected override void InitializeBindings()
         {
-            ViewModel.Email.FirstAsync()
-                .SubscribeOn(AndroidDependencyContainer.Instance.SchedulerProvider.MainScheduler)
-                .Subscribe(emailEditText.Rx().TextObserver())
+            forgotPasswordLabel.Rx().Tap()
+                .Subscribe(ViewModel.ForgotPassword.Inputs)
                 .DisposedBy(DisposeBag);
-
-            ViewModel.Password.FirstAsync()
-                .SubscribeOn(AndroidDependencyContainer.Instance.SchedulerProvider.MainScheduler)
-                .Subscribe(passwordEditText.Rx().TextObserver())
-                .DisposedBy(DisposeBag);
-
-            //Text
-            ViewModel.ErrorMessage
-                .Subscribe(errorTextView.Rx().TextObserver())
-                .DisposedBy(DisposeBag);
-
-            emailEditText.Rx().Text()
-                .Select(Email.From)
-                .Subscribe(ViewModel.SetEmail)
-                .DisposedBy(DisposeBag);
-
-            passwordEditText.Rx().Text()
-                .Select(Password.From)
-                .Subscribe(ViewModel.SetPassword)
-                .DisposedBy(DisposeBag);
-
-            ViewModel.IsLoading
-                .Select(loginButtonTitle)
-                .Subscribe(loginButton.Rx().TextObserver())
-                .DisposedBy(DisposeBag);
-
-            //Visibility
-            ViewModel.HasError
-                .Subscribe(errorTextView.Rx().IsVisible(useGone: false))
-                .DisposedBy(DisposeBag);
-
-            ViewModel.IsLoading
-                .Subscribe(progressBar.Rx().IsVisible(useGone: false))
-                .DisposedBy(DisposeBag);
-
-            ViewModel.LoginEnabled
-                .Subscribe(loginButton.Rx().Enabled())
-                .DisposedBy(DisposeBag);
-
-            //Commands
-            signupCard.Rx()
-                .BindAction(ViewModel.Signup)
-                .DisposedBy(DisposeBag);
-
-            loginButton.Rx().Tap()
-                .Subscribe(ViewModel.Login)
-                .DisposedBy(DisposeBag);
-
-            passwordEditText.Rx().EditorActionSent()
-                .Subscribe(ViewModel.Login)
-                .DisposedBy(DisposeBag);
-
-            googleLoginButton.Rx().Tap()
-                .Subscribe(ViewModel.GoogleLogin)
-                .DisposedBy(DisposeBag);
-
-            forgotPasswordView.Rx()
-                .BindAction(ViewModel.ForgotPassword)
-                .DisposedBy(DisposeBag);
-
+            
+            // TODO: bind correct view model
+            
             string loginButtonTitle(bool isLoading)
                 => isLoading ? "" : Shared.Resources.LoginTitle;
 
